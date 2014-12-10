@@ -86,9 +86,13 @@ public class JTextCNPJ extends JFormattedTextField
 		//Espaço em branco
 		else
 		{
-			JOptionPane.showMessageDialog(null, "CNPJ Inválido", "CNPJ Inválido",JOptionPane.INFORMATION_MESSAGE);
-			this.setText("");
-			this.requestFocus();
+			//Se não é a mascara em branco
+			if(!this.getText().equals("  .   .   /    -  "))
+			{
+				JOptionPane.showMessageDialog(null, "CNPJ Inválido", "CNPJ Inválido",JOptionPane.INFORMATION_MESSAGE);
+				this.setText("");
+				this.requestFocus();
+			}
 		}
     }//GEN-LAST:event_jTextMoedaFocusLost
 	 

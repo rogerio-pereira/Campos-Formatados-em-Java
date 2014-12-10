@@ -97,7 +97,7 @@ public class jTextMoeda extends JFormattedTextField {
 			str = "R$ " + str;
             this.setText(str);
         }else
-            this.setText("R$ 0,00");
+            this.setText("");
     }//GEN-LAST:event_jTextMoedaFocusLost
 
     private void jTextMoedaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextMoedaFocusGained

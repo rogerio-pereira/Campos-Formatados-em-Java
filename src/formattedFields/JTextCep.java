@@ -201,9 +201,9 @@ public class JTextCep extends JFormattedTextField
 	}*/
 
 	//public	javax.swing.JFormattedTextField JTextCep;
-	private WebServiceCep controlCep;
-	public	String endereco	= new String();
-	public	String bairro	= new String();
-	public	String cidade	= new String();
-	public	String estado	= new String();
+	private WebServiceCep	controlCep;
+	public	String			endereco	= new String();
+	public	String			bairro		= new String();
+	public	String			cidade		= new String();
+	public	String			estado		= new String();
 }

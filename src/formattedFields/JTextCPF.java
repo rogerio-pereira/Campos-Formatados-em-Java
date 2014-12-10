@@ -87,9 +87,13 @@ public class JTextCPF extends JFormattedTextField
 		//Espaço em Branco
 		else
 		{
-			JOptionPane.showMessageDialog(null, "CPF Inválido", "CPF Inválido",JOptionPane.INFORMATION_MESSAGE);
-			this.setText("");
-			this.requestFocus();
+			//Se não é a mascara em branco
+			if(!this.getText().equals("   .   .   -  "))
+			{
+				JOptionPane.showMessageDialog(null, "CPF Inválido", "CPF Inválido",JOptionPane.INFORMATION_MESSAGE);
+				this.setText("");
+				this.requestFocus();
+			}
 		}
     }//GEN-LAST:event_jTextMoedaFocusLost
 	 
