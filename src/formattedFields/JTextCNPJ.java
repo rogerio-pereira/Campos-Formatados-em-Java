@@ -209,8 +209,7 @@ public class JTextCNPJ extends JFormattedTextField
 			return false;
 	 }
 	 
-	 @Override
-	 public String getText()
+	 public String getCNPJ()
 	 {
 		 if(getText().equals("  .   .   /    -  "))
 			 return null;

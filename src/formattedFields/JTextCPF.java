@@ -197,8 +197,7 @@ public class JTextCPF extends JFormattedTextField
 			return false;
 	 }
 	 
-	@Override
-	public String getText()
+	public String getCPF()
 	{
 		if(getText().equals("   .   .   -  "))
 			return null;
