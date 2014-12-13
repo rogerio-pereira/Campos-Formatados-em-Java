@@ -123,7 +123,14 @@ public class jTextMoeda extends JFormattedTextField {
 		valor = valor.replace(".", "");
 		valor = valor.replace(",", ".");
 		
-		return Double.parseDouble(valor);
+		try
+		{
+			return Double.parseDouble(valor);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}		
 	}
 	
 	public void setText(Double valor)
