@@ -118,13 +118,13 @@ public class jTextMoeda extends JFormattedTextField {
 	
 	public Double getValue()
 	{
-		String valor = this.getText();
-		valor = valor.replace("R$ ", "");
-		valor = valor.replace(".", "");
-		valor = valor.replace(",", ".");
-		
 		try
 		{
+			String valor = this.getText();
+			valor = valor.replace("R$ ", "");
+			valor = valor.replace(".", "");
+			valor = valor.replace(",", ".");
+			
 			return Double.parseDouble(valor);
 		}
 		catch (Exception e)
