@@ -147,7 +147,7 @@ public class jTextMoeda extends JFormattedTextField {
 		}
 		catch (Exception e)
 		{
-			return null;
+			return 0.0;
 		}		
 	}
 	
