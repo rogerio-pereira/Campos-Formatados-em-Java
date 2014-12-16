@@ -6,6 +6,7 @@
 
 package formattedFields;
 
+import formattedFields.required.Extenso;
 import java.awt.BorderLayout;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -146,6 +147,12 @@ public class jTextMoeda extends JFormattedTextField {
 	{
 		this.setEnabled(habilita);
 	}*/
+	
+	public String getValueExtenso()
+	{
+		//new Extenso(this.getValue());
+		return new Extenso(this.getValue()).toString();
+	}
     
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
