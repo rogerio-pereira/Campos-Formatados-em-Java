@@ -20,27 +20,28 @@ package formattedFields;
 
 
 import java.awt.BorderLayout;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 
 /*
- *	Arquivo  JTextEmail.java
- *	Campo Formatado para e-mail
+ *	Arquivo  JTextHora.java
+ *	Campo Formatado para Hora, no formato ##:##:##
  *	
  *	Sistema:	CamposFormatados
  *	Autor:      Rogério Eduardo Pereira
- *	Data:       28/02/2014
+ *	Data:       12/03/2014
  */
-public class JTextEmail extends JTextField
+public class JTextHoraCompleta extends JFormattedTextField
 {
-	public JTextEmail ()
+	/*
+	 * Construtor
+	 */
+	public JTextHoraCompleta ()
 	{
 		initComponents();
 	}
-
+	
 	/** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -48,90 +49,108 @@ public class JTextEmail extends JTextField
      */
     // <editor-fold defaultstate="collapsed" desc=" Código Gerado ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        //JTextEmail = new javax.swing.JTextField();
+        //JTextHora = new javax.swing.JFormattedTextField();
+		
+		try
+        {
+            this.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex)
+        {
+            ex.printStackTrace();
+        }
 
         this.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextEmailActionPerformed(evt);
+                JTextHoraActionPerformed(evt);
             }
         });
         this.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                JTextEmailFocusGained(evt);
+                JTextHoraFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                JTextEmailFocusLost(evt);
+                JTextHoraFocusLost(evt);
             }
         });
 
         //javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		BorderLayout layout = new BorderLayout();
+        BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
         /*layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JTextEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+            .addComponent(JTextHora, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JTextEmail)
+            .addComponent(JTextHora)
         );*/
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMoedaActionPerformed
+    private void JTextHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMoedaActionPerformed
         this.transferFocus();
     }//GEN-LAST:event_jTextMoedaActionPerformed
 	
-	 private void JTextEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextMoedaFocusLost
-       if(!this.validaEmail())
-	   {
-			this.setText("");
-			this.requestFocus();
-	   }
+	 private void JTextHoraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextMoedaFocusLost
+        //Não tem espaços em branco
+		if(!this.getText().contains(" "))
+		{
+			if(!this.validaHora())
+			{
+				JOptionPane.showMessageDialog(null, "Hora Inválida", "Hora Inválida",JOptionPane.INFORMATION_MESSAGE);
+				this.requestFocus();
+				this.setText(null);
+			}
+		}
+		//Espaço em Branco
+		else
+		{
+			if(!this.getText().equals("  :  :  "))
+			{
+				JOptionPane.showMessageDialog(null, "Hora Inválida", "Hora Inválida",JOptionPane.INFORMATION_MESSAGE);
+				this.requestFocus();
+				this.setText(null);
+			}
+		}
     }//GEN-LAST:event_jTextMoedaFocusLost
 	 
-	 private void JTextEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextMoedaFocusGained
+	 private void JTextHoraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextMoedaFocusGained
         if (this.getText().trim().compareTo("") != 0){
             this.selectAll();
         }
 	}//GEN-LAST:event_jTextMoedaFocusGained
+	 
 	
-	private Boolean validaEmail()
+	private Boolean validaHora()
 	{
-		String email = this.getText();
+		String[] hora = this.getText().split(":");
 		
-		Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$"); 
-		Matcher m = p.matcher(email); 
-		if (m.find())
-		  return true;
-		else
-		{
-			JOptionPane.showMessageDialog(null, "E-mail Inválido", "E-mail Inválido",JOptionPane.INFORMATION_MESSAGE);
+		//Verifica horas
+		if((Integer.parseInt(hora[0]) < 0) || (Integer.parseInt(hora[0]) > 23))
 			return false;
-		}
-	}
-	
-	public Boolean validaEmail(String email)
-	{
-		Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$"); 
-		Matcher m = p.matcher(email); 
-		if (m.find())
-		  return true;
-		else
-		{
-			JOptionPane.showMessageDialog(null, "E-mail Inválido", "E-mail Inválido",JOptionPane.INFORMATION_MESSAGE);
+		//Verifica minutos
+		if((Integer.parseInt(hora[1]) < 0) || (Integer.parseInt(hora[1]) > 59))
 			return false;
-		}
-	}
+		//Verifica segundos
+		if((Integer.parseInt(hora[2]) < 0) || (Integer.parseInt(hora[2]) > 59))
+			return false;
 	
+		return true;
+	}
+	 
 	/*public String getText()
 	{
-		return this.JTextEmail.getText();
+		return this.JTextHora.getText();
 	}
 	
-	public void setText(String email)
+	public void setText(String hora)
 	{
-		this.JTextEmail.setText(email);
-	} */
+		this.JTextHora.setText(hora);
+	} 
 	 
-	//public JTextField JTextEmail;
+	public void setEnabled(Boolean habilita)
+	{
+		this.JTextHora.setEnabled(habilita);
+	}*/
+	
+	//public JFormattedTextField JTextHora;
 }
